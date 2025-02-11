@@ -9,7 +9,7 @@ refined_files = load_refined_files()
 current_refined_content = None
 current_file_name = None
 input_file = None
-settings_vars = {"laser_power": 500, "scanning_speed": 500, "layers": 5}  # Default settings
+settings_list = []  # Now allows multiple settings
 
 # Main application window
 root = tk.Tk()
@@ -61,7 +61,7 @@ upload_button.pack(pady=10)
 # Additional Settings Button
 settings_button = tk.Button(
     root, text="Additional Settings",
-    command=lambda: open_settings_window(settings_label, settings_vars),
+    command=lambda: open_settings_window(settings_label, settings_list),
     font=("Arial", 12), bg="#ff9800", fg="white", padx=10, pady=5
 )
 settings_button.pack(pady=5)
@@ -77,7 +77,7 @@ settings_frame.pack_forget()
 # Apply Settings Button
 apply_settings_button = tk.Button(
     root, text="Apply Settings",
-    command=lambda: globals().update(current_refined_content, current_file_name := apply_settings(input_file, refined_file_text, download_button, status_label, settings_vars)),
+    command=lambda: globals().update(current_refined_content, current_file_name := apply_settings(input_file, refined_file_text, download_button, status_label, settings_list)),
     font=("Arial", 12), bg="#007bff", fg="white", padx=10, pady=5
 )
 apply_settings_button.pack(pady=10)
